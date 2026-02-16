@@ -1,5 +1,7 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+
 PRODUCT_NAME := twrp_LI9
 PRODUCT_DEVICE := LI9
 PRODUCT_BRAND := TECNO
