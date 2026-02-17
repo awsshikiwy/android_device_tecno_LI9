@@ -11,16 +11,19 @@ TARGET_BOARD_PLATFORM := mt6833
 TARGET_BOOTLOADER_BOARD_NAME := mt6833
 TARGET_NO_BOOTLOADER := true
 
-# Kernel Config
+# Kernel Configuration
 BOARD_BOOT_HEADER_VERSION := 4
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
-# Prebuilt Paths
+# Prebuilt Kernel
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
+
+# DTB Configuration (التعديل الجديد هنا)
+# هذا السطر يخبر النظام أن يبحث عن dtb.img داخل مجلد prebuilt
+BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
 # Partitions
@@ -28,7 +31,12 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_HAS_LARGE_FILESYSTEM := true
 
-# Recovery Configuration (Android 15)
+# Dynamic Partitions
+BOARD_SUPER_PARTITION_GROUPS := main
+BOARD_MAIN_SIZE := 9126805504
+BOARD_MAIN_PARTITION_LIST := system vendor product system_ext
+
+# Recovery Configuration (Android 15 / Vendor Boot)
 BOARD_USES_RECOVERY_AS_BOOT := false
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
 TARGET_NO_RECOVERY := false
